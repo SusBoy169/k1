@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <button id="theme-toggle-button" title="Toggle Theme">☀️</button>
+        <!-- Sign-up Form -->
+        <div class="form-container" id="signup-container">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <div id="avatar-picker-container">
+                    <h4>Select Avatar:</h4>
+                    <div id="avatar-options">
+                        <!-- Avatars will be populated by JavaScript -->
+                    </div>
+                    <input type="hidden" id="selected-avatar-id" name="selectedAvatarId">
+                </div>
+                <div>
+                    <label for="signup-username">Username:</label>
+                    <input type="text" id="signup-username" name="username" required>
+                </div>
+                <div>
+                    <label for="signup-password">Password:</label>
+                    <input type="password" id="signup-password" name="password" required>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p id="signup-message"></p>
+            <p>Or</p>
+            <button type="button" id="google-signup-button" class="google-button auth-button">
+                <img src="assets/icons/google-logo.svg" alt="Google logo" class="button-icon"/> Sign up with Google
+            </button>
+            <p>Already have an account? <a href="#" id="show-signin">Sign In</a></p>
+        </div>
+
+        <!-- Sign-in Form -->
+        <div class="form-container" id="signin-container" style="display: none;">
+            <h2>Sign In</h2>
+            <form id="signin-form">
+                <div>
+                    <label for="signin-username">Username:</label>
+                    <input type="text" id="signin-username" name="username" required>
+                </div>
+                <div>
+                    <label for="signin-password">Password:</label>
+                    <input type="password" id="signin-password" name="password" required>
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+            <p id="signin-message"></p>
+            
+    
+            <button type="button" id="google-signin-button" class="google-button auth-button">
+                <img src="assets/icons/google-logo.svg" alt="Google logo" class="button-icon"/> Sign in with Google
+            </button>
+            <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+        </div>
+
+        <!-- Chat Section (Initially Hidden) -->
+        <div id="chat-container" style="display: none;"> <!-- Should be display:flex if online-users is a sidebar -->
+            <h2>Chat Room</h2>
+            <div id="chat-main-area"> <!-- Wrapper for messages and input -->
+                <div id="online-users-container">
+                    <h4>Online Users</h4>
+                    <ul id="online-users-list">
+                        <!-- User list will be populated here -->
+                    </ul>
+                </div>
+                <div id="chat-messages"></div>
+                <div id="chat-status"></div>
+                <div id="emoji-picker" style="display: none;">
+                    <!-- Simple Emojis -->
+                    <span class="emoji">😀</span>
+                    <span class="emoji">😂</span>
+                    <span class="emoji">😍</span>
+                    <span class="emoji">🤔</span>
+                    <span class="emoji">👍</span>
+                    <span class="emoji">❤️</span>
+                </div>
+                <div id="file-upload-status"></div>
+                <div id="typing-indicator" class="typing-indicator-hidden"></div>
+                <form id="chat-form">
+                    <button type="button" id="emoji-trigger" title="Emoji" class="chat-action-button">😀</button>
+                    <button type="button" id="attach-file-button" title="Attach file" class="chat-action-button">📎</button>
+                    <button type="button" id="gif-picker-button" title="Send a GIF" class="chat-action-button">GIF</button>
+                    <input type="file" id="file-input" style="display: none;">
+                    <input type="text" id="message-input" placeholder="Type your message..." required autocomplete="off">
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- GIF Picker Modal -->
+        <div id="gif-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="modal-close-button" id="gif-modal-close-button">&times;</span>
+                <h4>Search for GIFs</h4>
+                <input type="text" id="gif-search-input" placeholder="Search Giphy...">
+                <div id="gif-results-container">
+                    <!-- GIFs will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Incoming Call Notification -->
+        <div id="incoming-call-notification" class="call-notification" style="display: none;">
+            <p><span id="caller-username-notification"></span> is calling you!</p>
+            <button id="answer-call-button" class="call-control-button answer">Answer</button>
+            <button id="reject-call-button" class="call-control-button reject">Reject</button>
+        </div>
+
+        <!-- Active Call View -->
+        <div id="active-call-view" class="call-view" style="display: none;">
+            <div id="video-container">
+                <video id="local-video" autoplay muted playsinline></video>
+                <video id="remote-video" autoplay playsinline></video>
+            </div>
+            <div id="call-controls-active">
+                <button id="mute-audio-button" class="call-control-button">Mute Audio</button>
+                <button id="toggle-video-button" class="call-control-button">Video Off</button>
+                <button id="end-call-button" class="call-control-button end">End Call</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,975 @@
+:root {
+    /* Light Theme (Default) */
+    --page-bg-color: #f4f4f4;
+    --container-bg-color: #ffffff;
+    --primary-text-color: #333333;
+    --secondary-text-color: #555555;
+    --tertiary-text-color: #777777; /* For less important text like timestamps */
+    --accent-color: #007bff;
+    --accent-color-hover: #0056b3;
+    --accent-text-color: #ffffff;
+    --border-color: #dddddd;
+    --input-bg-color: #ffffff;
+    --input-border-color: #cccccc; /* Specific for input borders if different from general border */
+    --input-text-color: #333333;
+    --button-secondary-bg-color: #f0f0f0; /* For emoji/attach buttons */
+    --button-secondary-bg-hover-color: #e0e0e0;
+    --message-sent-bg-color: #d1e7dd;
+    --message-received-bg-color: #e2e3e5;
+    --chat-area-bg-color: #f9f9f9; /* Background for #chat-messages */
+    --error-text-color: red; /* Standard red */
+    --success-text-color: green; /* Standard green */
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --selected-item-border-color: #007bff;
+    --selected-item-shadow-color: rgba(0, 123, 255, 0.5);
+    --avatar-hover-border-color: #cccccc;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --online-list-bg-color: #f0f0f0;
+
+    /* Font stack */
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    /* Reusable values */
+    --border-radius-small: 4px;
+    --border-radius-medium: 6px;
+    --border-radius-large: 8px;
+    --border-radius-pill: 20px;
+
+    --padding-xsmall: 5px;
+    --padding-small: 8px;
+    --padding-medium: 12px;
+    --padding-large: 15px;
+
+    --input-focus-shadow: 0 0 0 3px var(--accent-color-shadow);
+    --accent-color-shadow: rgba(0, 123, 255, 0.25);
+    --message-bubble-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    --username-color: var(--primary-text-color);
+    --timestamp-color: var(--tertiary-text-color);
+    --modal-overlay-bg-color: rgba(0, 0, 0, 0.5);
+    --modal-content-bg-color: var(--container-bg-color);
+    --modal-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    --results-area-bg-color: var(--page-bg-color);
+    --call-notification-bg: var(--container-bg-color);
+    --call-view-bg: var(--page-bg-color);
+    --video-bg-color: #000000;
+    --button-reject-bg: #dc3545; /* Red for reject/end */
+    --button-reject-hover-bg: #c82333;
+    --button-answer-bg: #28a745; /* Green for answer */
+    --button-answer-hover-bg: #218838;
+    --button-default-bg: var(--button-secondary-bg-color); /* For general call control buttons like mute/video */
+    --button-default-hover-bg: var(--button-secondary-bg-hover-color);
+    --button-default-text-color: var(--primary-text-color);
+}
+
+body.dark-theme {
+    --page-bg-color: #121212;
+    --container-bg-color: #1e1e1e;
+    --primary-text-color: #e0e0e0;
+    --secondary-text-color: #b3b3b3;
+    --tertiary-text-color: #888888;
+    --accent-color: #0098ff;
+    --accent-color-hover: #007acc;
+    --accent-text-color: #ffffff;
+    --border-color: #444444;
+    --input-bg-color: #2c2c2c;
+    --input-border-color: #555555;
+    --input-text-color: #e0e0e0;
+    --button-secondary-bg-color: #3a3a3a;
+    --button-secondary-bg-hover-color: #4f4f4f;
+    --message-sent-bg-color: #054029;
+    --message-received-bg-color: #3a3a3a;
+    --chat-area-bg-color: #242424;
+    --error-text-color: #ff6b6b;
+    --success-text-color: #90ee90;
+    --link-color: #0098ff;
+    --link-hover-color: #33abff;
+    --selected-item-border-color: #0098ff;
+    --selected-item-shadow-color: rgba(0, 152, 255, 0.5);
+    --avatar-hover-border-color: #555555;
+    --box-shadow-color: rgba(255, 255, 255, 0.05);
+
+    /* Font stack is already inherited, no need to redefine unless different for dark theme */
+    --accent-color-shadow: rgba(0, 152, 255, 0.3);
+    --message-bubble-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    --username-color: var(--primary-text-color);
+    --timestamp-color: var(--tertiary-text-color);
+    --modal-overlay-bg-color: rgba(0, 0, 0, 0.7);
+    --modal-content-bg-color: var(--container-bg-color);
+    --modal-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    --results-area-bg-color: var(--page-bg-color);
+    --online-list-bg-color: #2c2c2c;
+    --call-notification-bg: #2c2c2c;
+    --call-view-bg: #1e1e1e;
+    --video-bg-color: #111111;
+    --button-reject-bg: #e64f50;
+    --button-reject-hover-bg: #d93738;
+    --button-answer-bg: #30b850;
+    --button-answer-hover-bg: #289c43;
+    --button-default-bg: var(--button-secondary-bg-color);
+    --button-default-hover-bg: var(--button-secondary-bg-hover-color);
+    --button-default-text-color: var(--primary-text-color);
+}
+
+body {
+    font-family: var(--font-family-sans-serif);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--page-bg-color);
+    color: var(--primary-text-color);
+    margin: 0;
+}
+.button {
+    background-color: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #3700b3;
+    transform: scale(1.05);
+  }
+  :root {
+    --primary-color: #6200ea;
+    --secondary-color: #03dac6;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+  }
+.container {
+    background-color: var(--container-bg-color);
+    padding: var(--padding-large);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 0 10px var(--box-shadow-color);
+    max-width: 500px;
+    width: 90%;
+    margin: var(--padding-large) auto;
+}
+
+.form-container {
+    margin-bottom: var(--padding-large);
+}
+.form-container > *:not(h2):not(button):not(p):not(#avatar-picker-container) {
+    margin-bottom: var(--padding-medium);
+}
+
+
+h2 {
+    text-align: center;
+    color: var(--primary-text-color);
+    margin-top: 0;
+    margin-bottom: var(--padding-large);
+}
+#chat-container h2 {
+    margin-bottom: var(--padding-medium);
+}
+
+
+label {
+    display: block;
+    margin-bottom: var(--padding-small);
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+
+/* General Text Input Styling */
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: var(--padding-medium);
+    margin-bottom: var(--padding-large);
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    border-radius: var(--border-radius-medium);
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--input-focus-shadow);
+}
+
+
+/* Primary Action Button Styling (e.g., form submit) */
+button[type="submit"], .button-primary, .auth-button {
+    width: 100%;
+    padding: var(--padding-medium);
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    text-align: center;
+}
+button[type="submit"], .button-primary {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border: 1px solid var(--accent-color);
+}
+
+button[type="submit"]:hover, .button-primary:hover {
+    background-color: var(--accent-color-hover);
+    border-color: var(--accent-color-hover);
+}
+button[type="submit"]:active, .button-primary:active, .auth-button:active {
+    transform: translateY(1px);
+}
+button[type="submit"]:disabled, .button-primary:disabled, .auth-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+p {
+    text-align: center;
+    margin-top: var(--padding-medium);
+    margin-bottom: var(--padding-medium);
+    color: var(--primary-text-color);
+    line-height: 1.6;
+}
+.form-container p {
+    margin-top: var(--padding-large);
+    margin-bottom: var(--padding-medium);
+}
+
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+}
+
+#signup-message,
+#signin-message {
+    text-align: center;
+    margin-top: var(--padding-medium);
+    font-weight: bold;
+    min-height: 1.2em;
+}
+
+.success {
+    color: var(--success-text-color);
+}
+
+.error {
+    color: var(--error-text-color);
+}
+
+/* Chat Section Styles */
+#chat-container {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px);
+    max-height: 700px;
+}
+
+#chat-main-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* min-height is important to make sure flex children can shrink properly if content is small,
+       but also allows growth. Using 0 is a common flex trick. */
+    min-height: 0;
+    overflow: hidden; /* Prevent chat-main-area itself from growing indefinitely due to its content */
+}
+
+#chat-messages {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    padding: var(--padding-medium);
+    margin-bottom: var(--padding-medium);
+    overflow-y: auto;
+    background-color: var(--chat-area-bg-color);
+    border-radius: var(--border-radius-small);
+}
+
+#chat-messages div {
+    color: var(--primary-text-color);
+}
+
+#chat-messages .message-sent > div:not(.message-system) {
+    background-color: var(--message-sent-bg-color);
+    box-shadow: var(--message-bubble-shadow);
+}
+
+#chat-messages .message-received > div:not(.message-system) {
+    background-color: var(--message-received-bg-color);
+    box-shadow: var(--message-bubble-shadow);
+}
+
+#chat-status {
+    font-size: 0.9em;
+    color: var(--timestamp-color);
+    text-align: center;
+    margin-bottom: var(--padding-small);
+    padding: var(--padding-xsmall) 0;
+    height: 1.2em;
+}
+#chat-status.success {
+    color: var(--success-text-color);
+}
+#chat-status.error {
+    color: var(--error-text-color);
+}
+
+
+#chat-form {
+    display: flex;
+    align-items: center;
+    padding-top: var(--padding-small);
+}
+
+#message-input {
+    flex-grow: 1;
+    margin-bottom: 0;
+    margin-right: var(--padding-small);
+    padding: var(--padding-medium);
+    border-radius: var(--border-radius-pill);
+}
+
+#chat-form button[type="submit"] {
+    width: auto;
+    padding: var(--padding-medium) var(--padding-large);
+    border-radius: var(--border-radius-pill);
+    font-weight: bold;
+}
+
+
+/* Chat Action Buttons (Emoji, File, GIF) */
+.chat-action-button {
+    padding: var(--padding-small) var(--padding-medium);
+    font-size: 1.2em;
+    margin-right: var(--padding-small);
+    background-color: var(--button-secondary-bg-color);
+    border: 1px solid var(--input-border-color);
+    color: var(--secondary-text-color);
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.chat-action-button:hover {
+    background-color: var(--button-secondary-bg-hover-color);
+}
+.chat-action-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+#gif-picker-button {
+    font-size: 1rem;
+}
+
+
+#emoji-picker {
+    padding: var(--padding-small);
+    border: 1px solid var(--border-color);
+    background-color: var(--container-bg-color);
+    border-radius: var(--border-radius-large);
+    margin-bottom: var(--padding-small);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.emoji {
+    font-size: 1.5em;
+    padding: var(--padding-xsmall);
+    cursor: pointer;
+    border-radius: var(--border-radius-small);
+}
+
+.emoji:hover {
+    background-color: var(--button-secondary-bg-hover-color);
+}
+
+.message-bubble .timestamp {
+    font-size: 0.75em;
+    color: var(--timestamp-color);
+}
+
+.message-system {
+    font-style: italic;
+    color: var(--secondary-text-color);
+    text-align: center;
+    margin: var(--padding-small) 0;
+    font-size: 0.9em;
+    padding: var(--padding-xsmall);
+    display: block;
+}
+.message-system.error {
+    color: var(--error-text-color);
+    font-weight: bold;
+}
+
+
+#file-upload-status {
+    font-size: 0.85em;
+    color: var(--secondary-text-color);
+    text-align: center;
+    margin-top: var(--padding-small);
+    margin-bottom: var(--padding-small);
+    height: 1.1em;
+    padding: 2px;
+}
+#file-upload-status.success {
+    color: var(--success-text-color);
+}
+#file-upload-status.error {
+    color: var(--error-text-color);
+}
+
+
+.message-bubble .message-file-content a {
+    color: var(--link-color);
+    text-decoration: underline;
+    font-weight: bold;
+}
+.message-bubble .message-file-content a:hover {
+    color: var(--link-hover-color);
+}
+.message-bubble .message-file-content span:not(.timestamp) {
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+}
+
+#avatar-picker-container {
+    margin-bottom: var(--padding-large);
+    text-align: center;
+}
+
+#avatar-picker-container h4 {
+    margin-bottom: var(--padding-medium);
+    font-size: 1em;
+    color: var(--primary-text-color);
+}
+
+#avatar-options {
+    display: flex;
+    justify-content: center;
+    gap: var(--padding-medium);
+}
+
+.avatar-option {
+    width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-large);
+    cursor: pointer;
+    padding: 2px;
+    transition: border-color 0.3s ease;
+}
+
+.avatar-option.selected {
+    border-color: var(--selected-item-border-color);
+    box-shadow: 0 0 5px var(--selected-item-shadow-color);
+}
+
+.avatar-option:hover:not(.selected) {
+    border-color: var(--avatar-hover-border-color);
+}
+
+
+.chat-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: var(--padding-small);
+    vertical-align: top;
+    flex-shrink: 0;
+}
+
+#chat-messages > div.message-sent,
+#chat-messages > div.message-received {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--padding-medium);
+    padding: 0;
+}
+
+#chat-messages > div.message-sent {
+    flex-direction: row-reverse;
+}
+#chat-messages > div.message-sent .chat-avatar {
+    margin-right: 0;
+    margin-left: var(--padding-small);
+}
+
+.message-bubble {
+    flex-grow: 1;
+    word-break: break-word;
+    padding: var(--padding-small) var(--padding-medium);
+    border-radius: var(--border-radius-pill);
+    line-height: 1.4;
+}
+.message-bubble strong {
+    font-weight: bold;
+    color: var(--username-color);
+    margin-right: var(--padding-xsmall);
+}
+
+.message-bubble .message-text-content {
+}
+
+
+#theme-toggle-button {
+    position: absolute;
+    top: var(--padding-medium);
+    right: var(--padding-medium);
+    padding: var(--padding-small) var(--padding-small);
+    background-color: var(--button-secondary-bg-color);
+    color: var(--secondary-text-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    font-size: 1.2em;
+    line-height: 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#theme-toggle-button:hover {
+    background-color: var(--button-secondary-bg-hover-color);
+}
+.container {
+    position: relative;
+}
+
+/* GIF Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-overlay-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg-color);
+    color: var(--primary-text-color);
+    margin: auto;
+    padding: var(--padding-large);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-large);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: var(--modal-shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+}
+
+.modal-content h4 {
+    color: var(--primary-text-color);
+    margin-top: 0;
+    margin-bottom: var(--padding-medium);
+    font-size: 1.25rem;
+}
+
+.modal-close-button {
+    color: var(--secondary-text-color);
+    position: absolute;
+    top: var(--padding-medium);
+    right: var(--padding-medium);
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+
+#gif-search-input {
+    margin-top: var(--padding-xsmall);
+    margin-bottom: var(--padding-medium);
+}
+
+#gif-results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--padding-small);
+    max-height: 40vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: var(--padding-small);
+    background-color: var(--results-area-bg-color);
+    border-radius: var(--border-radius-medium);
+}
+#gif-results-container p,
+#gif-loading-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--secondary-text-color);
+    padding: var(--padding-large);
+    font-style: italic;
+}
+
+
+.gif-result-img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-small);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gif-result-img:hover {
+    border-color: var(--selected-item-border-color);
+    box-shadow: 0 0 3px var(--selected-item-border-color);
+}
+
+.chat-gif-embed {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: var(--border-radius-small);
+    margin-top: var(--padding-xsmall);
+    display: block;
+}
+
+#typing-indicator {
+    font-size: 0.85em;
+    color: var(--secondary-text-color);
+    height: 1.5em;
+    padding: var(--padding-xsmall) var(--padding-medium);
+    font-style: italic;
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    text-align: left;
+    margin-bottom: var(--padding-xsmall);
+}
+.typing-indicator-hidden {
+    opacity: 0;
+}
+
+.auth-button {
+    margin-bottom: var(--padding-small);
+}
+
+.github-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-small) var(--padding-large);
+    margin-top: var(--padding-small);
+    background-color: #24292e;
+    color: #ffffff;
+    border: 1px solid #24292e;
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+.github-button:hover {
+    background-color: #3e444a;
+}
+.github-button:active {
+    transform: translateY(1px);
+}
+.github-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.button-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: var(--padding-small);
+}
+.github-button .button-icon {
+    filter: invert(1);
+}
+
+
+body.dark-theme .github-button {
+    background-color: #333;
+    border-color: #333;
+}
+body.dark-theme .github-button:hover {
+    background-color: #444;
+}
+
+.google-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-small) var(--padding-large);
+    margin-top: var(--padding-xsmall);
+    background-color: #ffffff;
+    color: #444444;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-medium);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    font-weight: bold;
+}
+
+.google-button:hover {
+    background-color: #f8f8f8;
+    border-color: #c6c6c6;
+}
+.google-button:active {
+    transform: translateY(1px);
+}
+.google-button .button-icon {
+    filter: none;
+}
+
+body.dark-theme .google-button {
+    background-color: var(--button-secondary-bg-color);
+    color: var(--primary-text-color);
+    border-color: var(--input-border-color);
+}
+body.dark-theme .google-button:hover {
+    background-color: var(--button-secondary-bg-hover-color);
+}
+
+/* Online Users List Styles */
+#online-users-container {
+    padding: var(--padding-medium);
+    background-color: var(--online-list-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+    margin-bottom: var(--padding-medium);
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#online-users-container h4 {
+    margin-top: 0;
+    margin-bottom: var(--padding-small);
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--padding-xsmall);
+}
+
+#online-users-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#online-users-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--padding-small);
+    color: var(--primary-text-color);
+    font-size: 0.9em;
+}
+
+#online-users-list li.active-chat-context {
+    background-color: var(--accent-color-shadow); /* Use a subtle highlight */
+    border-radius: var(--border-radius-small);
+    font-weight: bold;
+}
+/* Ensure active chat context overrides hover effects if necessary, or blends well */
+#online-users-list li.active-chat-context:hover {
+    background-color: var(--accent-color-shadow); /* Keep same background on hover */
+}
+
+#online-users-list li .unread-badge {
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border-radius: 10px;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    margin-left: auto; /* Push to the right, before call buttons */
+    margin-right: 8px; /* Space before call buttons */
+    display: none; /* Hidden by default */
+}
+
+
+#online-users-list .chat-avatar {
+    width: 24px;
+    height: 24px;
+    margin-right: var(--padding-small);
+}
+
+/* Call UI Elements */
+.call-button {
+    margin-left: auto; /* Pushes button to the right of the list item */
+    padding: var(--padding-xsmall) var(--padding-small);
+    font-size: 0.8em;
+    background-color: var(--accent-color);
+    color: var(--accent-text-color);
+    border: none;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+}
+.call-button:hover {
+    background-color: var(--accent-color-hover);
+}
+
+.call-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--call-notification-bg);
+    padding: var(--padding-large);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--modal-shadow);
+    z-index: 200; /* Above other elements */
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+.call-notification p {
+    margin-top: 0;
+    margin-bottom: var(--padding-medium);
+    color: var(--primary-text-color);
+}
+.call-control-button {
+    padding: var(--padding-small) var(--padding-medium);
+    border: none;
+    border-radius: var(--border-radius-medium);
+    color: var(--accent-text-color);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 var(--padding-xsmall);
+}
+.call-control-button.answer { background-color: var(--button-answer-bg); }
+.call-control-button.answer:hover { background-color: var(--button-answer-hover-bg); }
+.call-control-button.reject, .call-control-button.end { background-color: var(--button-reject-bg); }
+.call-control-button.reject:hover, .call-control-button.end:hover { background-color: var(--button-reject-hover-bg); }
+/* Default styling for call control buttons (like mute, video toggle) */
+.call-control-button {
+    background-color: var(--button-default-bg);
+    color: var(--button-default-text-color);
+    border: 1px solid var(--border-color); /* Add a subtle border */
+}
+.call-control-button:hover {
+    background-color: var(--button-default-hover-bg);
+}
+.call-control-button:disabled {
+    background-color: var(--button-secondary-bg-color);
+    color: var(--tertiary-text-color);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+#call-controls-active {
+    display: flex;
+    justify-content: center;
+    gap: var(--padding-medium);
+    margin-top: var(--padding-medium);
+    padding: var(--padding-small);
+    background-color: var(--container-bg-color); /* Match chat input area or similar */
+    border-radius: var(--border-radius-medium);
+}
+#call-controls-active .call-control-button {
+    padding: var(--padding-small) var(--padding-medium); /* Adjust padding if needed for these specific buttons */
+    min-width: 120px; /* Ensure buttons have a decent minimum width */
+    text-align: center;
+}
+
+
+.call-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--call-view-bg);
+    z-index: 150; /* Below notification, above rest of app */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-large);
+}
+#video-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Max width for video area */
+    flex-grow: 1; /* Take up available space */
+    display: flex; /* For layout of videos if needed */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--padding-medium);
+}
+#remote-video {
+    width: 100%;
+    height: auto;
+    max-height: calc(100% - 100px); /* Adjust based on button height and padding */
+    display: block;
+    background-color: var(--video-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+}
+#local-video {
+    width: 25%;
+    max-width: 180px; /* Slightly larger local preview */
+    position: absolute;
+    bottom: var(--padding-medium);
+    right: var(--padding-medium);
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius-small);
+    background-color: var(--video-bg-color);
+    z-index: 160; /* Above remote video */
+}
+#end-call-button {
+    /* This is inside #call-controls-active now, so specific margin/padding might not be needed here if handled by flex container */
+    /* If it needs to be larger than other control buttons, specific styling can be added */
+    /* For now, it will inherit from .call-control-button and .end */
+}
+
+/* Ensure video elements are hidden if their srcObject is null or tracks are disabled */
+#local-video:not([srcObject]), #remote-video:not([srcObject]) {
+    display: none;
+}
+#local-video[style*="display: none"], #remote-video[style*="display: none"] { /* When display:none is set by JS */
+    display: none !important;
+}
